@@ -62,7 +62,7 @@ def approx_average_is_average(hand):
 
     first_card = hand[0]
     last_card = hand[-1]
-    average_of_first_and_last_cards = (first_card + last_card) / 2
+    average_of_first_and_last_cards = card_average([first_card, last_card])
 
     cards_in_hand = len(hand)
     median_card_index = (cards_in_hand - 1) // 2
@@ -79,10 +79,10 @@ def average_even_is_average_odd(hand):
     """
 
     even_cards = hand[1::2]
-    even_cards_average = sum(even_cards) / len(even_cards)
+    even_cards_average = card_average(even_cards)
 
     odd_cards = hand[::2]
-    odd_cards_average = sum(odd_cards) / len(odd_cards)
+    odd_cards_average = card_average(odd_cards)
 
     return even_cards_average == odd_cards_average
 
