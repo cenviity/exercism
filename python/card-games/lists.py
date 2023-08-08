@@ -3,6 +3,8 @@
 Python list documentation: https://docs.python.org/3/tutorial/datastructures.html
 """
 
+from math import floor, ceil
+
 
 JACK_CARD = 11
 
@@ -65,8 +67,9 @@ def approx_average_is_average(hand):
     average_of_first_and_last_cards = card_average([first_card, last_card])
 
     cards_in_hand = len(hand)
-    median_card_index = (cards_in_hand - 1) // 2
-    median_of_hand = hand[median_card_index]
+    median_card_index = (cards_in_hand - 1) / 2
+    median_cards = [hand[floor(median_card_index)], hand[ceil(median_card_index)]]
+    median_of_hand = card_average(median_cards)
 
     return card_average(hand) in [average_of_first_and_last_cards, median_of_hand]
 
