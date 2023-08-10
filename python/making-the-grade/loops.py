@@ -8,7 +8,10 @@ def round_scores(student_scores):
     :return: list - student scores *rounded* to nearest integer value.
     """
 
-    pass
+    for index, score in enumerate(student_scores):
+        student_scores[index] = round(score)
+
+    return student_scores
 
 
 def count_failed_students(student_scores):
@@ -18,7 +21,12 @@ def count_failed_students(student_scores):
     :return: int - count of student scores at or below 40.
     """
 
-    pass
+    count = 0
+
+    for score in student_scores:
+        count += (score <= 40)
+
+    return count
 
 
 def above_threshold(student_scores, threshold):
@@ -29,7 +37,13 @@ def above_threshold(student_scores, threshold):
     :return: list - of integer scores that are at or above the "best" threshold.
     """
 
-    pass
+    scores_above_threshold = []
+
+    for score in student_scores:
+        if score >= threshold:
+            scores_above_threshold.append(score)
+
+    return scores_above_threshold
 
 
 def letter_grades(highest):
@@ -46,7 +60,13 @@ def letter_grades(highest):
             86 <= "A" <= 100
     """
 
-    pass
+    grades = ["A", "B", "C", "D"]
+    failing_threshold = 40
+    score_range = highest - failing_threshold
+    score_interval = score_range // len(grades)
+
+    return list(range(failing_threshold + 1, highest, score_interval))
+
 
 
 def student_ranking(student_scores, student_names):
