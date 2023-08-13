@@ -8,10 +8,7 @@ def round_scores(student_scores):
     :return: list - student scores *rounded* to nearest integer value.
     """
 
-    for index, score in enumerate(student_scores):
-        student_scores[index] = round(score)
-
-    return student_scores
+    return [round(score) for score in student_scores]
 
 
 def count_failed_students(student_scores):
@@ -21,12 +18,10 @@ def count_failed_students(student_scores):
     :return: int - count of student scores at or below 40.
     """
 
-    count = 0
+    failing_score = 40
+    failed_scores = [score for score in student_scores if score <= failing_score]
 
-    for score in student_scores:
-        count += score <= 40
-
-    return count
+    return len(failed_scores)
 
 
 def above_threshold(student_scores, threshold):
@@ -38,13 +33,7 @@ def above_threshold(student_scores, threshold):
     :return: list - of integer scores that are at or above the "best" threshold.
     """
 
-    scores_above_threshold = []
-
-    for score in student_scores:
-        if score >= threshold:
-            scores_above_threshold.append(score)
-
-    return scores_above_threshold
+    return [score for score in student_scores if score >= threshold]
 
 
 def letter_grades(highest):
@@ -77,12 +66,12 @@ def student_ranking(student_scores, student_names):
     :return: list - of strings in format ["<rank>. <student name>: <score>"].
     """
 
-    rankings = []
+    student_names_and_scores = zip(student_names, student_scores)
 
-    for index, (name, score) in enumerate(zip(student_names, student_scores)):
-        rankings.append(f"{index + 1}. {name}: {score}")
-
-    return rankings
+    return [
+        f"{index + 1}. {name}: {score}"
+        for index, (name, score) in enumerate(student_names_and_scores)
+    ]
 
 
 def perfect_score(student_info):
@@ -93,12 +82,15 @@ def perfect_score(student_info):
     :return: list - first `[<student name>, 100]` or `[]` if no student score of 100 is found.
     """
 
-    for student_score in student_info:
-        score = student_score[1]
+    return next(
+        (
+            student_score
+            for student_score in student_info
+            if is_perfect_score(student_score[1])
+        ),
+        [],
+    )
 
-        if score == 100:
-            return student_score
 
-        continue
-
-    return []
+def is_perfect_score(score):
+    return score == 100
