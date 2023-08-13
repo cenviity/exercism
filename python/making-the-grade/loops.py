@@ -93,4 +93,12 @@ def perfect_score(student_info):
 
 
 def is_perfect_score(score):
+    """Checks if a score is a perfect score.
+
+    Args:
+        score (int): of a student's exam score.
+
+    Returns:
+        bool: true if `score` is a perfect score, otherwise false.
+    """
     return score == 100
