@@ -8,7 +8,7 @@ def get_coordinate(record):
     :return: str - the extracted map coordinate.
     """
 
-    pass
+    return record[1]
 
 
 def convert_coordinate(coordinate):
@@ -18,7 +18,7 @@ def convert_coordinate(coordinate):
     :return: tuple - the string coordinate split into its individual components.
     """
 
-    pass
+    return tuple(coordinate)
 
 
 def compare_records(azara_record, rui_record):
@@ -29,7 +29,10 @@ def compare_records(azara_record, rui_record):
     :return: bool - do the coordinates match?
     """
 
-    pass
+    coordinate_azara = azara_record[1]
+    coordinate_rui = rui_record[1]
+
+    return convert_coordinate(coordinate_azara) == coordinate_rui
 
 
 def create_record(azara_record, rui_record):
@@ -37,10 +40,17 @@ def create_record(azara_record, rui_record):
 
     :param azara_record: tuple - a (treasure, coordinate) pair.
     :param rui_record: tuple - a (location, coordinate, quadrant) trio.
-    :return: tuple or str - the combined record (if compatible), or the string "not a match" (if incompatible).
+    :return: tuple or str - the combined record (if compatible),
+    or the string "not a match" (if incompatible).
     """
 
-    pass
+    if not compare_records(azara_record, rui_record):
+        return "not a match"
+
+    treasure, coordinate_azara = azara_record
+    location, coordinate_rui, quadrant = rui_record
+
+    return (treasure, coordinate_azara, location, coordinate_rui, quadrant)
 
 
 def clean_up(combined_record_group):
@@ -54,4 +64,11 @@ def clean_up(combined_record_group):
     (see HINTS.md for an example).
     """
 
-    pass
+    cleaned_records = []
+
+    for record in combined_record_group:
+        treasure, _, location, coordinate_rui, quadrant = record
+        cleaned_record = (treasure, location, coordinate_rui, quadrant)
+        cleaned_records.append(f"{cleaned_record}\n")
+
+    return "".join(cleaned_records)
