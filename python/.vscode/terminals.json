@@ -9,7 +9,7 @@
     },
     {
       "name": "tests",
-      "command": "ptw . -qx",
+      "command": "ptw . --now -qx",
       "split": "fish",
       "dynamicTitle": true
     }
