@@ -1,0 +1,17 @@
+{
+  "autorun": true,
+  "terminals": [
+    {
+      "name": "fish",
+      "focus": true,
+      "command": "",
+      "dynamicTitle": true
+    },
+    {
+      "name": "tests",
+      "command": "ptw . -qx",
+      "split": "fish",
+      "dynamicTitle": true
+    }
+  ]
+}
