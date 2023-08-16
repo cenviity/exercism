@@ -64,11 +64,21 @@ def clean_up(combined_record_group):
     (see HINTS.md for an example).
     """
 
-    cleaned_records = []
-
-    for record in combined_record_group:
-        treasure, _, location, coordinate_rui, quadrant = record
-        cleaned_record = (treasure, location, coordinate_rui, quadrant)
-        cleaned_records.append(f"{cleaned_record}\n")
+    cleaned_records = map(clean_combined_record, combined_record_group)
 
     return "".join(cleaned_records)
+
+
+def clean_combined_record(record):
+    """Clean up a record by removing the unwanted duplicate coordinate.
+
+    Args:
+        record (tuple): Everything from both participants.
+
+    Returns:
+        str: Cleaned record followed by a newline.
+    """
+    treasure, _, location, coordinate_rui, quadrant = record
+    cleaned_record = (treasure, location, coordinate_rui, quadrant)
+
+    return f"{cleaned_record}\n"
