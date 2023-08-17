@@ -20,8 +20,8 @@ def add_items(inventory, items):
     """
 
     for item in items:
-        inventory[item] = inventory.get(item, 0)
-        inventory[item] += 1
+        original_count = inventory.get(item, 0)
+        inventory.update({item: original_count + 1})
 
     return inventory
 
@@ -34,10 +34,8 @@ def decrement_items(inventory, items):
     :return: dict - updated inventory with items decremented.
     """
 
-    for item in items:
-        inventory[item] = inventory.get(item, 0)
-        if inventory[item] != 0:
-            inventory[item] -= 1
+    for item, original_count in inventory.items():
+        inventory[item] = max(original_count - items.count(item), 0)
 
     return inventory
 
@@ -50,8 +48,8 @@ def remove_item(inventory, item):
     :return: dict - updated inventory with item removed. Current inventory if item does not match.
     """
 
-    if inventory.get(item):
-        inventory.pop(item)
+    if item in inventory:
+        del inventory[item]
 
     return inventory
 
