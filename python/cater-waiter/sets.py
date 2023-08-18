@@ -23,7 +23,7 @@ def clean_ingredients(dish_name, dish_ingredients):
     followed by the de-duped `set` of ingredients as the second item.
     """
 
-    pass
+    return (dish_name, set(dish_ingredients))
 
 
 def check_drinks(drink_name, drink_ingredients):
@@ -38,7 +38,12 @@ def check_drinks(drink_name, drink_ingredients):
 
     """
 
-    pass
+    if ALCOHOLS.isdisjoint(drink_ingredients):
+        drink_type = "Mocktail"
+    else:
+        drink_type = "Cocktail"
+
+    return f"{drink_name} {drink_type}"
 
 
 def categorize_dish(dish_name, dish_ingredients):
